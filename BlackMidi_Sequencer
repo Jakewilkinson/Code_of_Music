@@ -1,0 +1,93 @@
+import controlP5.*;
+import themidibus.*;
+
+ControlP5 cp5;
+
+int tempoVal = 120;
+int ballSpeed = 300;
+int Vel = 2;
+
+Knob tempKnob;
+
+void setup() {
+  
+  size(1200, 720);
+  
+  cp5 = new ControlP5(this);
+  tempKnob = cp5.addKnob("tempo")
+                .setRange(0, 5)
+                .setValue(50)
+                .setPosition(275, 20)
+                .setRadius(60)
+                .setDragDirection(Knob.VERTICAL)
+                ;
+  
+}
+
+void draw() {
+ 
+  
+ background(24, 27, 77, 40); 
+ fill(tempoVal);
+ for (int i = 0; i < 42; i++) {
+ fill( 40 + i*3, 20 + i* 6, i*8);
+ stroke(0);
+ strokeWeight(3);
+ rect(275 + i * 20, 630, 20, 90);
+ }
+ 
+ for (int i = 0; i < 6; i++) {
+   fill(0);
+   rect(290 + i * 140, 630, 10, 50);
+   rect(310 + i * 140, 630, 10, 50);
+   rect(350 + i * 140, 630, 10, 50);
+   rect(370 + i * 140, 630, 10, 50);
+   rect(390 + i * 140, 630, 10, 50);
+   
+   
+ }
+ fill(25);
+ rect(0, 0, 260, 1200);
+ 
+ for (int i = 0; i < 4; i++) {
+   
+ fill(i * 30 + 85);
+ stroke(0);
+ strokeWeight(3);
+ rect(10, 15 + i * 180, 240, 160, 7);
+ }
+ 
+ for (int i = 0; i < 72; i++) {
+   stroke(0);
+   strokeWeight(1);
+   fill(i*1.5, i*2, 80, random(150));
+   rect(270 + i * 11.66, 260, 11.66, 10);
+ }
+ 
+ for (int i = 0; i < 72; i++) {
+   stroke(40, 214, 45);
+   strokeWeight(3);
+   noFill();
+   ellipse(280 + i * 11.66, ballSpeed, 11.66, 11.66);
+ }
+ 
+ ballSpeed = ballSpeed + Vel;
+ if(ballSpeed > 700) {
+ ballSpeed = 300;
+ }
+ 
+ 
+}
+ 
+ void mouseDragged() {
+   
+   if(mouseX > 10 && mouseX < 250 && mouseY > 15 && mouseY < 175) {
+     line(pmouseX, pmouseY, mouseX, mouseY);
+   }
+ }
+ 
+ void knob(int Value) {
+   Vel = Value;
+   println("value" + Value);
+ }
+   
